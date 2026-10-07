@@ -1,0 +1,29 @@
+---
+- name: Install and Configure Web Server
+  hosts: aws_ec2
+  become: true
+
+  tasks:
+    - name: Ping host
+      ansible.builtin.ping:
+
+    - name: Fetch EC2 instance metadata
+      amazon.aws.ec2_metadata_facts:
+
+    - name: Install the latest version of Apache
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Ensures Apache is running
+      ansible.builtin.systemd_service:
+        state: started
+        name: httpd
+
+    - name: Copy template file
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: '0644'
