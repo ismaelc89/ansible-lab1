@@ -2,6 +2,8 @@
 - name: Install and Configure Web Server
   hosts: aws_ec2
   become: true
+  vars:
+    custom_hostname: ismael-web
 
   tasks:
     - name: Ping host
@@ -9,6 +11,10 @@
 
     - name: Fetch EC2 instance metadata
       amazon.aws.ec2_metadata_facts:
+
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: "{{ custom_hostname }}"
 
     - name: Install the latest version of Apache
       ansible.builtin.dnf:

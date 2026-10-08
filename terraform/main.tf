@@ -18,6 +18,7 @@ resource "aws_subnet" "ansible_subnet" {
   vpc_id                  = aws_vpc.ansible_vpc.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = "true"
+  availability_zone = data.aws_ec2_instance_type_offerings.t3_micro.locations[0]
 
   tags = {
     Name = "ansible_public_subnet"

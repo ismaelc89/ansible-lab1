@@ -17,3 +17,13 @@ data "aws_ami" "amazon_ami" {
     values = ["x86_64"]
   }
 }
+
+# Get AZs in the current region that support t3.micro
+data "aws_ec2_instance_type_offerings" "t3_micro" {
+  filter {
+    name   = "instance-type"
+    values = ["t3.micro"]
+  }
+
+  location_type = "availability-zone"
+}
