@@ -56,7 +56,7 @@ jobs:
 
     # Install Python
     - name: Set up Python
-      uses: actions/set-pyhton@v5
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
@@ -69,7 +69,7 @@ jobs:
     # Ansible Syntax Check
     - name: Ansible Syntax Check
       working-directory: ./ansible
-      run: ansible-playbook site.ym --syntax-check
+      run: ansible-playbook site.yml --syntax-check
 
     # Ansible Lint Check
     - name: Ansible Lint Check

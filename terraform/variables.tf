@@ -1,5 +1,5 @@
 variable "instance_env" {
   type        = string
-  default     = "Production"
+  default     = "Stage"
   description = "The environment the instance belongs to"
 }
