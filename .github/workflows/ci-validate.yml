@@ -56,7 +56,7 @@ jobs:
 
     # Install Python
     - name: Set up Python
-      uses: actions/set-pyhton@v5
+      uses: actions/setup-pyhton@v5
       with:
         python-version: '3.10'
 
