@@ -15,10 +15,10 @@ resource "aws_internet_gateway" "ansible_ig" {
 }
 
 resource "aws_subnet" "ansible_subnet" {
-  vpc_id                  = aws_vpc.ansible_vpc.id
-  cidr_block              = "10.0.1.0/24"
+  vpc_id = aws_vpc.ansible_vpc.id
+  cidr_block = "10.0.1.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone       = data.aws_ec2_instance_type_offerings.t3_micro.locations[0]
+  availability_zone = data.aws_ec2_instance_type_offerings.t3_micro.locations[0]
 
   tags = {
     Name = "ansible_public_subnet"
@@ -40,13 +40,13 @@ resource "aws_route_table" "ansible_public_rt" {
 
 resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.ansible_public_rt.id
-  subnet_id      = aws_subnet.ansible_subnet.id
+  subnet_id = aws_subnet.ansible_subnet.id
 }
 
 resource "aws_security_group" "public_ec2_sg" {
-  name        = "web_ec2_sg"
+  name = "web_ec2_sg"
   description = "SG for public ec2"
-  vpc_id      = aws_vpc.ansible_vpc.id
+  vpc_id = aws_vpc.ansible_vpc.id
 
   tags = {
     Name = "web_ec2_sg"
@@ -56,9 +56,9 @@ resource "aws_security_group" "public_ec2_sg" {
 resource "aws_vpc_security_group_ingress_rule" "allow_http" {
   security_group_id = aws_security_group.public_ec2_sg.id
   ip_protocol       = "tcp"
-  cidr_ipv4         = "0.0.0.0/0"
-  from_port         = 80
-  to_port           = 80
+  cidr_ipv4  = "0.0.0.0/0"
+  from_port = 80
+  to_port = 80
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
