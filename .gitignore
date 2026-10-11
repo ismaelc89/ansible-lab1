@@ -13,3 +13,4 @@ override.tf.json
 *.retry
 .ansible/
 vault_password.txt
+.DS_Store
